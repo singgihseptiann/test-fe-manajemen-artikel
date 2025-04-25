@@ -34,12 +34,17 @@ export function UserDropdown() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 px-3 py-1 rounded-md hover:bg-muted transition">
-          <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
+      <DropdownMenuTrigger
+        asChild
+        className="cursor-pointer outline-none hover:bg-transparent focus:bg-transparent"
+      >
+        <button className="hover:bg-muted flex items-center gap-2 rounded-md px-3 py-1 transition">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-200 font-semibold text-blue-900">
             {firstLetter}
           </div>
-          <span className="font-medium">{user.name}</span>
+          <span className="hidden font-medium underline md:block">
+            {user.name}
+          </span>
         </button>
       </DropdownMenuTrigger>
 
