@@ -42,7 +42,7 @@ export function UserDropdown() {
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-200 font-semibold text-blue-900">
             {firstLetter}
           </div>
-          <span className="hidden font-medium underline md:block">
+          <span className="hidden font-medium text-blue-900 underline md:block">
             {user.name}
           </span>
         </button>
