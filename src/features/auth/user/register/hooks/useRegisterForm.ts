@@ -1,8 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useLogin } from "./useLogin";
-import userAuth from "@/service/auth";
+import { useRegister } from "./useRegister";
 
 const FormSchema = z.object({
   username: z.string().min(2, {
@@ -11,26 +10,24 @@ const FormSchema = z.object({
   password: z.string().min(10, {
     message: "Password must be at least 10 characters.",
   }),
+  role: z.enum(["User", "Admin"]),
 });
-export function useLoginForm() {
+
+export function useRegisterForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",
       password: "",
+      role: undefined,
     },
   });
 
-  const loginMutation = useLogin();
+  const registerMutation = useRegister();
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    try {
-      const response = await loginMutation.mutateAsync(data);
-      return response;
-    } catch (error) {
-      console.error("Login error:", error);
-    }
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    registerMutation.mutate(data);
   }
 
-  return { form, onSubmit, isSubmitting: loginMutation.isPending };
+  return { form, onSubmit, isSubmitting: registerMutation.isPending };
 }

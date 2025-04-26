@@ -29,8 +29,9 @@ export default function ArticlesListSection() {
     );
   }
 
-  if (isError) return <p>Failed to fetch articles</p>;
-  if (!articles.length) return <p>No articles available</p>;
+  if (isError) return <p className="text-center">Failed to fetch articles</p>;
+  if (!articles.length)
+    return <p className="text-center">No articles available</p>;
 
   return (
     <Container>
