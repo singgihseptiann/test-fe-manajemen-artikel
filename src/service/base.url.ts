@@ -1,11 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
-// Instance axios dengan konfigurasi dasar
-const apiClient = axios.create({
-  baseURL: "https://test-fe.mysellerpintar.com/api",  // URL dasar API
+export const apiServices = axios.create({
+  baseURL: "https://test-fe.mysellerpintar.com/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export default apiClient;
+export const userAuth = axios.create({
+  baseURL: "https://test-fe.mysellerpintar.com/api/auth",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
