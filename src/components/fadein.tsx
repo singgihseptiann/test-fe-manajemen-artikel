@@ -1,4 +1,3 @@
-// components/motion/MotionFadeIn.tsx
 import { motion, type MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -39,6 +38,7 @@ export default function MotionFadeIn({
     <motion.div
       initial={{ opacity: 0, ...getInitialPosition() }}
       animate={{ opacity: 1, x: 0, y: 0 }}
+      exit={{ opacity: 0, ...getInitialPosition() }}
       transition={{ duration: 0.4, delay, ease: "easeOut" }}
       className={cn(className)}
       {...props}
