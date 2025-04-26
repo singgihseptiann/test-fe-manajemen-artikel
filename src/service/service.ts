@@ -1,10 +1,10 @@
-import apiClient from "./base.url";
+import { apiServices } from "./base.url";
 
 const api = {
   // Fungsi GET untuk mengambil data, dengan params opsional
   get: async (endpoint: string, params: { [key: string]: any } = {}) => {
     try {
-      const response = await apiClient.get(endpoint, { params });
+      const response = await apiServices.get(endpoint, { params });
       return response.data;
     } catch (error) {
       throw error;
@@ -14,7 +14,7 @@ const api = {
   // Fungsi POST untuk mengirimkan data
   post: async (endpoint: string, data: any) => {
     try {
-      const response = await apiClient.post(endpoint, data);
+      const response = await apiServices.post(endpoint, data);
       return response.data;
     } catch (error) {
       throw error;
@@ -24,7 +24,7 @@ const api = {
   // Fungsi PUT untuk memperbarui data
   put: async (endpoint: string, data: any) => {
     try {
-      const response = await apiClient.put(endpoint, data);
+      const response = await apiServices.put(endpoint, data);
       return response.data;
     } catch (error) {
       throw error;
@@ -34,7 +34,7 @@ const api = {
   // Fungsi DELETE untuk menghapus data
   delete: async (endpoint: string) => {
     try {
-      const response = await apiClient.delete(endpoint);
+      const response = await apiServices.delete(endpoint);
       return response.data;
     } catch (error) {
       throw error;

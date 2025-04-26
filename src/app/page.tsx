@@ -1,11 +1,9 @@
-import ArticlesListSection from "@/features/user/articles/articles.list.section";
-import HeroSection from "@/features/user/hero/hero.section";
+import UserLogin from "@/features/auth/user/login/user.login";
 
 export default function Home() {
   return (
-    <div className="space-y-5">
-      <HeroSection />
-      <ArticlesListSection />
+    <div className="flex h-screen w-full items-center justify-center">
+      <UserLogin />
     </div>
   );
 }
