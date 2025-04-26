@@ -17,7 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Link from "next/link"; // Import Link dari Next.js
+import Link from "next/link";
 
 export function UserDropdown() {
   const user = {
@@ -27,10 +27,7 @@ export function UserDropdown() {
 
   const firstLetter = user.name.charAt(0).toUpperCase();
 
-  const handleLogout = () => {
-    console.log("Logout clicked");
-    // logic logout di sini, misal clear cookie/token, redirect, dll
-  };
+  const handleLogout = () => {};
 
   return (
     <DropdownMenu>

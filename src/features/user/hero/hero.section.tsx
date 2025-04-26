@@ -11,7 +11,7 @@ export default function HeroSection() {
   const [search, setSearch] = React.useState("");
   const { data: response, isLoading, isError } = useCategories(search);
   const categories = response?.data ?? [];
-  console.log(categories);
+
   return (
     <Hero>
       <MotionFadeIn delay={1.5} direction="up">

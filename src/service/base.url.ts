@@ -7,7 +7,7 @@ export const apiServices = axios.create({
   },
 });
 
-export const userAuth = axios.create({
+export const userAuthBaseUrl = axios.create({
   baseURL: "https://test-fe.mysellerpintar.com/api/auth",
   headers: {
     "Content-Type": "application/json",

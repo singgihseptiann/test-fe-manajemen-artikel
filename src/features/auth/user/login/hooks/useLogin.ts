@@ -1,13 +1,18 @@
-import userLogin from "@/service/auth";
+import { useRouter } from "next/navigation"; // <- import router
 import { useMutation } from "@tanstack/react-query";
+import userAuth from "@/service/auth";
 
 export function useLogin() {
+  const router = useRouter();
+
   return useMutation({
     mutationFn: (data: { username: string; password: string }) =>
-      userLogin.post("login", data),
+      userAuth.post("login", data),
 
     onSuccess: (response) => {
-      console.log("Login success:", response);
+      localStorage.setItem("user_token", response.token);
+
+      router.push("/home");
     },
 
     onError: (error) => {
