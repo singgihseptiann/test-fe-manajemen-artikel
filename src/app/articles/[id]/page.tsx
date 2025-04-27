@@ -7,14 +7,11 @@ import { formatDate } from "@/utils/dateUtils";
 import RelatedArticles from "@/features/user/detail-articles/components/related.articles";
 import Container from "@/components/container";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default async function ArticleDetailPage({ params }: PageProps) {
+export default async function ArticleDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = await params;
 
   try {
