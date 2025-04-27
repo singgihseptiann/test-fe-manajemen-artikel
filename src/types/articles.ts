@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface ArticleCardProps {
   id?: string;
   imageUrl: string;
@@ -25,4 +27,12 @@ export interface DetailPageProps {
   params: {
     id: string;
   };
+}
+
+export interface DetailArticleProps {
+  title: string;
+  imageUrl: string | StaticImageData ;
+  date: string;
+  content: string;
+  tags: { name: string }[];
 }

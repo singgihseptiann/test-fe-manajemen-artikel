@@ -1,29 +1,44 @@
+import { notFound } from "next/navigation";
 import DetailArticle from "@/features/user/detail-articles/components/detail.articles";
+import imgArticles from "@/assets/user/articles/image.jpg";
 import { fetchArticleById } from "@/hooks/useDetailArticles";
+import { fetchArticlesBySameCategory } from "@/hooks/useRelatedArticles";
 import { DetailPageProps } from "@/types/articles";
 import { formatDate } from "@/utils/dateUtils";
-import { notFound } from "next/navigation";
+import RelatedArticles from "@/features/user/detail-articles/components/related.articles";
+import Container from "@/components/container";
 
 export default async function ArticleDetailPage({ params }: DetailPageProps) {
   const { id } = params;
 
   try {
     const article = await fetchArticleById(id);
-
+    console.log(article);
     if (!article) {
       return notFound();
     }
 
+    // Fetch related articles if category exists
+    const relatedArticles = article.category?.name
+      ? await fetchArticlesBySameCategory(article.category.name, article.id)
+      : [];
+
     return (
-      <div className="flex h-screen items-center justify-center">
+      <Container>
+        <div className="mt-20"></div>
         <DetailArticle
           title={article.title}
-          imageUrl={article.imageUrl || "/default-image.jpg"}
+          imageUrl={article.imageUrl || imgArticles}
           date={formatDate(article.createdAt)}
           content={article.content}
           tags={article.category ? [{ name: article.category.name }] : []}
         />
-      </div>
+
+        <RelatedArticles
+          articles={relatedArticles}
+          categoryName={article.category?.name || ""}
+        />
+      </Container>
     );
   } catch (error) {
     console.error("Error rendering article:", error);

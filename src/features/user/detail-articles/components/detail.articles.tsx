@@ -1,16 +1,7 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-
-interface DetailArticleProps {
-  title: string;
-  imageUrl: string;
-  date: string;
-  content: string;
-  tags: { name: string }[];
-}
+import { DetailArticleProps } from "@/types/articles";
 
 export default function DetailArticle({
   title,
@@ -20,8 +11,18 @@ export default function DetailArticle({
   tags,
 }: DetailArticleProps) {
   return (
-    <div className="mx-auto max-w-3xl p-4">
-      <div className="mb-6">
+    <div className="space-y-5">
+      <div className="flex justify-center gap-2">
+        <div className="text-muted-foreground text-center text-sm">{date}</div>
+        <div className="text-muted-foreground text-center text-sm">
+          created by admin
+        </div>
+      </div>
+
+      <h1 className="mx-auto w-full text-center text-2xl font-bold md:w-96">
+        {title}
+      </h1>
+      <div className="">
         <Image
           src={imageUrl}
           alt={title}
@@ -30,12 +31,7 @@ export default function DetailArticle({
           className="w-full rounded-lg object-cover"
         />
       </div>
-
-      <div className="mb-4 text-sm text-muted-foreground">{date}</div>
-
-      <h1 className="text-3xl font-bold mb-4">{title}</h1>
-
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2">
         {tags.map((tag, index) => (
           <Badge key={index} variant="outline">
             {tag.name}
@@ -43,9 +39,7 @@ export default function DetailArticle({
         ))}
       </div>
 
-      <div className="prose prose-lg max-w-none">
-        {content}
-      </div>
+      <div className="prose prose-lg max-w-none">{content}</div>
     </div>
   );
 }

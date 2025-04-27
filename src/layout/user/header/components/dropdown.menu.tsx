@@ -17,23 +17,26 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import Link from "next/link";
-import { useUserProfile } from "@/features/user/profile/hooks/useProfile";
+import { useGetUserProfile } from "@/features/user/profile/hooks/useProfile";
 import { Button } from "@/components/ui/button";
 import { useLogout } from "../hooks/useLogout";
 
 export function UserDropdown() {
-  const { data, isLoading, isError } = useUserProfile();
+  const { data, isLoading, isError } = useGetUserProfile();
   const { openDialog, setOpenDialog, handleLogout } = useLogout();
 
   if (isLoading) {
     return null;
   }
 
-  if (isError || !data) {
-    return <p className="text-red-500">Failed to load user</p>;
-  }
+  // Gunakan data dari API atau data yang disimpan di localStorage jika terjadi error
+  const usernameFromAPI = data?.username;
+  const usernameFromStorage = localStorage.getItem("user_username");
 
-  const firstLetter = data.username?.charAt(0).toUpperCase() || "U";
+  const username =
+    isError || !usernameFromAPI ? usernameFromStorage : usernameFromAPI;
+
+  const firstLetter = username?.charAt(0).toUpperCase() || "U";
 
   return (
     <>
@@ -47,13 +50,13 @@ export function UserDropdown() {
               {firstLetter}
             </div>
             <span className="hidden font-medium text-blue-900 underline md:block">
-              {data.username || "User"}
+              {username || "User"}
             </span>
           </button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="w-56" align="end">
-          <DropdownMenuLabel>{data.username || "User"}</DropdownMenuLabel>
+          <DropdownMenuLabel>{username || "User"}</DropdownMenuLabel>
           <DropdownMenuGroup>
             <Link href="/profile">
               <DropdownMenuItem>Profile</DropdownMenuItem>
@@ -68,7 +71,7 @@ export function UserDropdown() {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Ini dialognya di luar DropdownMenu biar ga ketimpa event */}
+      {/* Dialog di luar DropdownMenu agar tidak tertimpa event */}
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent>
           <DialogHeader>

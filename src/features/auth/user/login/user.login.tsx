@@ -1,9 +1,20 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { LoginForm } from "./components/login";
 import Link from "next/link";
 import logoIpsum from "@/assets/user/logo/logo2.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 export default function UserLogin() {
+  const router = useRouter();
+  useEffect(() => {
+    const userToken = localStorage.getItem("user_token");
+
+    if (userToken) {
+      router.push("/articles");
+    }
+  }, []);
   return (
     <div>
       <div className="w-full rounded-lg bg-white p-8 shadow-sm">

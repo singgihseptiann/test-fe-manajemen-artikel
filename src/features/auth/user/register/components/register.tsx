@@ -20,9 +20,16 @@ import {
 } from "@/components/ui/select";
 import { useRegisterForm } from "../hooks/useRegisterForm";
 import { Spinner } from "@/components/spinner";
+import { Eye, EyeOff } from "lucide-react";
 
 export function RegisterForm() {
-  const { form, onSubmit, isSubmitting } = useRegisterForm();
+  const {
+    form,
+    onSubmit,
+    isSubmitting,
+    showPassword,
+    togglePasswordVisibility,
+  } = useRegisterForm();
 
   return (
     <Form {...form}>
@@ -50,11 +57,24 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Input password"
-                  {...field}
-                />
+                <div className="relative">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Input password"
+                    {...field}
+                  />
+                  <button
+                    type="button"
+                    className="absolute top-1/2 right-3 -translate-y-1/2 transform"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="text-gray-400" />
+                    ) : (
+                      <Eye className="text-gray-400" />
+                    )}
+                  </button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
