@@ -10,9 +10,9 @@ import Container from "@/components/container";
 export default async function ArticleDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string }; // No need for "await" here
 }) {
-  const { id } = await params;
+  const { id } = params; // Directly use params without awaiting
 
   try {
     const article = await fetchArticleById(id);
