@@ -9,11 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
-
-import { ArticleCardProps } from "@/types/articles.card.types";
+import Link from "next/link"; // import Link
+import { ArticleCardProps } from "@/types/articles";
 import Tag from "@/components/tag";
 
+// components/ArticlesCard.tsx
 export default function ArticlesCard({
+  id,
   imageUrl,
   date,
   title,
@@ -21,18 +23,27 @@ export default function ArticlesCard({
   tags,
 }: ArticleCardProps) {
   return (
-    <Card className="border-0 shadow-none">
-      <CardHeader>
-        <Image src={imageUrl} alt="Card Image" width={300} height={200} />
-        <CardDescription>{date}</CardDescription>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-        <div className="flex gap-2">
-          {tags.map((category, index) => (
-            <Tag key={index} label={category.name} />
-          ))}
-        </div>
-      </CardHeader>
-    </Card>
+    <Link href={`/articles/${id}`}>
+      {" "}
+      {/* Using id as that's what the API expects */}
+      <Card className="cursor-pointer border-0 shadow-none transition-shadow hover:shadow-md">
+        <CardHeader>
+          <Image
+            src={imageUrl || "/default-image.jpg"}
+            alt="Card Image"
+            width={300}
+            height={200}
+          />
+          <CardDescription>{date}</CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+          <div className="flex gap-2">
+            {tags.map((category, index) => (
+              <Tag key={index} label={category.name} />
+            ))}
+          </div>
+        </CardHeader>
+      </Card>
+    </Link>
   );
 }

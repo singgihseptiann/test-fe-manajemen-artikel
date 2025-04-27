@@ -14,6 +14,7 @@ export default function ArticlesListSection() {
   const { data: response, isLoading, isError } = useArticles();
 
   const articles = response?.data ?? [];
+
   const totalCount = response?.total ?? 0;
   const totalPages = Math.ceil(totalCount / limit);
 
@@ -42,6 +43,7 @@ export default function ArticlesListSection() {
         {articles.map((article: any, index: number) => (
           <MotionFadeIn direction="left" key={article.id} delay={index * 1}>
             <ArticlesCard
+              id={article.id}
               imageUrl={article.imageUrl || imgArticles}
               date={new Date(article.createdAt).toLocaleDateString()}
               title={article.title}

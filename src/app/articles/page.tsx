@@ -3,7 +3,7 @@ import ArticlesListSection from "@/features/user/articles/articles.list.section"
 import HeroSection from "@/features/user/hero/hero.section";
 import React from "react";
 
-export default function HomePage() {
+export default function ArticlesPage() {
   return (
     <ProtectedRoute>
       <div className="space-y-5">

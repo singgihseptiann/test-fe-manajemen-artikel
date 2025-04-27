@@ -1,5 +1,3 @@
-// components/ProtectedRoute.tsx
-
 "use client";
 
 import { Spinner } from "@/components/spinner";
@@ -12,22 +10,28 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); // default null untuk status loading
 
   useEffect(() => {
     const token = localStorage.getItem("user_token");
+    const role = localStorage.getItem("user_role");
 
-    if (!token) {
-      router.push("/"); // Redirect kalau ga ada token
+    // Jika tidak ada token dan role, redirect ke halaman login
+    if (!token && !role) {
+      router.replace("/");
     } else {
-      setIsAuthenticated(true); // Kalau ada token, boleh akses
+      setIsAuthenticated(true);
     }
   }, [router]);
+
+  if (isAuthenticated === null) {
+    return <Spinner />;
+  }
 
   if (!isAuthenticated) {
     return (
       <p className="items center flex h-screen justify-center text-center text-2xl text-red-500">
-        anda belum login
+        Anda belum login
       </p>
     );
   }

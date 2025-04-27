@@ -1,11 +1,11 @@
-// root layout (rootLayout.tsx)
 import React from "react";
-// Pastikan ini adalah client-side wrapper
+
 import { Geist, Geist_Mono } from "next/font/google";
 import UserLayout from "@/layout/user/user.layout";
 import "./globals.css";
 import Providers from "./providers";
-
+import { Suspense } from "react";
+import ProgressBar from "@/components/ProgressBar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,6 +26,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Suspense>
+          <ProgressBar />
+        </Suspense>
         <Providers>
           <UserLayout>{children}</UserLayout>
         </Providers>
