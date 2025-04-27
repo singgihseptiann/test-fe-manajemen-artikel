@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"; // <- import router
+import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import userAuth from "@/service/auth";
 
@@ -11,12 +11,13 @@ export function useLogin() {
 
     onSuccess: (response) => {
       localStorage.setItem("user_token", response.token);
-
+      alert("Login berhasil!");
       router.push("/articles");
     },
 
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Login error:", error);
+      alert("Login gagal. Periksa username dan password kamu.");
     },
   });
 }
