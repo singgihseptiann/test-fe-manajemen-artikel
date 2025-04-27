@@ -3,14 +3,19 @@ import DetailArticle from "@/features/user/detail-articles/components/detail.art
 import imgArticles from "@/assets/user/articles/image.jpg";
 import { fetchArticleById } from "@/hooks/useDetailArticles";
 import { fetchArticlesBySameCategory } from "@/hooks/useRelatedArticles";
-import { DetailPageProps } from "@/types/articles";
 import { formatDate } from "@/utils/dateUtils";
 import RelatedArticles from "@/features/user/detail-articles/components/related.articles";
 import Container from "@/components/container";
 
-export default async function ArticleDetailPage({ params }: DetailPageProps) {
-  const resolvedParams = await params;
-  const { id } = resolvedParams;
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default async function ArticleDetailPage({ params }: PageProps) {
+  const { id } = await params;
 
   try {
     const article = await fetchArticleById(id);
@@ -19,7 +24,6 @@ export default async function ArticleDetailPage({ params }: DetailPageProps) {
       return notFound();
     }
 
-    // Fetch related articles if category exists
     const relatedArticles = article.category?.name
       ? await fetchArticlesBySameCategory(article.category.name, article.id)
       : [];
