@@ -9,11 +9,12 @@ import RelatedArticles from "@/features/user/detail-articles/components/related.
 import Container from "@/components/container";
 
 export default async function ArticleDetailPage({ params }: DetailPageProps) {
-  const { id } = params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
 
   try {
     const article = await fetchArticleById(id);
-    console.log(article);
+
     if (!article) {
       return notFound();
     }

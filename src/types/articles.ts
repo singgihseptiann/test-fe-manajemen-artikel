@@ -27,11 +27,12 @@ export interface DetailPageProps {
   params: {
     id: string;
   };
+  searchParams?: Record<string, string | string[] | undefined>;
 }
 
 export interface DetailArticleProps {
   title: string;
-  imageUrl: string | StaticImageData ;
+  imageUrl: string | StaticImageData;
   date: string;
   content: string;
   tags: { name: string }[];
