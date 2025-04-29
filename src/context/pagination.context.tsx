@@ -1,4 +1,3 @@
-// context/pagination.context.tsx
 import { createContext, useContext, useState } from "react";
 
 interface PaginationContextType {
@@ -6,6 +5,10 @@ interface PaginationContextType {
   setPage: (page: number) => void;
   limit: number;
   setLimit: (limit: number) => void;
+  category: string;
+  setCategory: (category: string) => void;
+  search: string;
+  setSearch: (search: string) => void;
 }
 
 const PaginationContext = createContext<PaginationContextType | undefined>(
@@ -18,10 +21,23 @@ export function PaginationProvider({
   children: React.ReactNode;
 }) {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(9);
+  const [limit, setLimit] = useState(5);
+  const [category, setCategory] = useState("");
+  const [search, setSearch] = useState("");
 
   return (
-    <PaginationContext.Provider value={{ page, setPage, limit, setLimit }}>
+    <PaginationContext.Provider
+      value={{
+        page,
+        setPage,
+        limit,
+        setLimit,
+        category,
+        setCategory,
+        search,
+        setSearch,
+      }}
+    >
       {children}
     </PaginationContext.Provider>
   );

@@ -2,7 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { usePagination } from "@/context/pagination.context";
 import useSearchInput from "../hooks/useSearchInput";
 
 interface ArticleSearchInputProps {
@@ -10,7 +11,13 @@ interface ArticleSearchInputProps {
 }
 
 const ArticleSearchInput: FC<ArticleSearchInputProps> = ({ onSearch }) => {
+  const { search, setSearch } = usePagination();
+
   const { inputValue, setInputValue } = useSearchInput(onSearch);
+
+  useEffect(() => {
+    setInputValue(search);
+  }, [search, setInputValue]);
 
   return (
     <div className="relative w-full">

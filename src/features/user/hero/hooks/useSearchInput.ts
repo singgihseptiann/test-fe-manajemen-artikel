@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const useSearchInput = (
   onSearch: (value: string) => void,
@@ -6,13 +6,15 @@ const useSearchInput = (
 ) => {
   const [inputValue, setInputValue] = useState("");
 
-  useEffect(() => {
+  const debouncedSearch = useCallback(() => {
     const timer = setTimeout(() => {
       onSearch(inputValue);
     }, delay);
 
     return () => clearTimeout(timer);
   }, [inputValue, delay, onSearch]);
+
+  useEffect(debouncedSearch, [debouncedSearch]);
 
   return {
     inputValue,

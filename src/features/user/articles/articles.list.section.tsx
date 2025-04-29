@@ -42,7 +42,7 @@ export default function ArticlesListSection() {
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {articles.map((article: any, index: number) => (
-            <MotionFadeIn direction="left" key={article.id} delay={index * 1}>
+            <MotionFadeIn direction="left" key={article.id} delay={index * 0.5}>
               <ArticlesCard
                 id={article.id}
                 imageUrl={article.imageUrl || imgArticles}
