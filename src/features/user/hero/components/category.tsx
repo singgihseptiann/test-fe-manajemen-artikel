@@ -1,7 +1,7 @@
 "use client";
 
 import { CategoryProps } from "@/types/hero.types";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -10,14 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { usePagination } from "@/context/pagination.context";
+import { useCategoryLogic } from "../hooks/useCategories";
 
 export const Category: FC<CategoryProps> = ({ categories, defaultValue }) => {
-  const { setCategory } = usePagination();
+  const { category, setCategory, isSearchActive } = useCategoryLogic();
 
   return (
     <Select
       onValueChange={(value) => setCategory(value)}
-      defaultValue={defaultValue}
+      value={isSearchActive ? "" : category || defaultValue}
     >
       <SelectTrigger className="w-full cursor-pointer bg-white text-black md:w-[180px]">
         <SelectValue placeholder="Select Category" />

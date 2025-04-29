@@ -11,13 +11,15 @@ interface ArticleSearchInputProps {
 }
 
 const ArticleSearchInput: FC<ArticleSearchInputProps> = ({ onSearch }) => {
-  const { search, setSearch } = usePagination();
-
+  const { search, setSearch, setCategory } = usePagination();
   const { inputValue, setInputValue } = useSearchInput(onSearch);
 
   useEffect(() => {
+    if (search) {
+      setCategory("");
+    }
     setInputValue(search);
-  }, [search, setInputValue]);
+  }, [search, setCategory, setInputValue]);
 
   return (
     <div className="relative w-full">
