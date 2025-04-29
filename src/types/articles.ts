@@ -20,6 +20,7 @@ export interface DetailArticles {
   };
   user?: {
     username: string;
+    role?: string;
   };
 }
 
@@ -36,4 +37,5 @@ export interface DetailArticleProps {
   date: string;
   content: string;
   tags: { name: string }[];
+  createdBy?: string;
 }

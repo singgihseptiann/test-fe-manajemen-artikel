@@ -24,25 +24,30 @@ export default function ArticlesCard({
 }: ArticleCardProps) {
   return (
     <Link href={`/articles/${id}`}>
-      {" "}
-      {/* Using id as that's what the API expects */}
-      <Card className="cursor-pointer border-0 shadow-none transition-shadow hover:shadow-md">
-        <CardHeader>
+      <Card className="group cursor-pointer overflow-hidden rounded-md border-0 py-0 shadow-none transition-shadow hover:shadow-md">
+        <div className="overflow-hidden rounded-md">
           <Image
             src={imageUrl || "/default-image.jpg"}
             alt="Card Image"
             width={300}
             height={200}
+            className="h-[200px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <CardDescription>{date}</CardDescription>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
-          <div className="flex gap-2">
+        </div>
+        <CardContent className="p-4">
+          <CardDescription className="text-muted-foreground mb-1 text-sm">
+            {date}
+          </CardDescription>
+          <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+          <CardDescription className="mt-2 line-clamp-2 text-sm">
+            {description}
+          </CardDescription>
+          <div className="mt-3 flex flex-wrap gap-2">
             {tags.map((category, index) => (
               <Tag key={index} label={category.name} />
             ))}
           </div>
-        </CardHeader>
+        </CardContent>
       </Card>
     </Link>
   );

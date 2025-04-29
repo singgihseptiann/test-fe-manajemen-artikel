@@ -34,6 +34,7 @@ export default async function ArticleDetailPage({
           date={formatDate(article.createdAt)}
           content={article.content}
           tags={article.category ? [{ name: article.category.name }] : []}
+          createdBy={article.user?.role || ""}
         />
 
         <RelatedArticles

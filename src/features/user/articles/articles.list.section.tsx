@@ -36,29 +36,31 @@ export default function ArticlesListSection() {
 
   return (
     <Container>
-      <div className="flex px-6">
-        showing: {articles.length} of {totalCount}
-      </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {articles.map((article: any, index: number) => (
-          <MotionFadeIn direction="left" key={article.id} delay={index * 1}>
-            <ArticlesCard
-              id={article.id}
-              imageUrl={article.imageUrl || imgArticles}
-              date={new Date(article.createdAt).toLocaleDateString()}
-              title={article.title}
-              description={article.content}
-              tags={article.category ? [article.category] : []}
-            />
-          </MotionFadeIn>
-        ))}
-      </div>
+      <div className="space-y-5">
+        <div className="flex px-6">
+          showing: {articles.length} of {totalCount}
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {articles.map((article: any, index: number) => (
+            <MotionFadeIn direction="left" key={article.id} delay={index * 1}>
+              <ArticlesCard
+                id={article.id}
+                imageUrl={article.imageUrl || imgArticles}
+                date={new Date(article.createdAt).toLocaleDateString()}
+                title={article.title}
+                description={article.content}
+                tags={article.category ? [article.category] : []}
+              />
+            </MotionFadeIn>
+          ))}
+        </div>
 
-      <PaginationControls
-        page={page}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
+        <PaginationControls
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      </div>
     </Container>
   );
 }
